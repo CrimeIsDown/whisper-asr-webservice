@@ -27,6 +27,4 @@ RUN poetry install
 
 EXPOSE 9000
 
-ENV ASR_WORKERS=1
-
-ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:9000", "--workers", "$ASR_WORKERS", "--timeout", "0", "app.webservice:app", "-k", "uvicorn.workers.UvicornWorker"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]

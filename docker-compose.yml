@@ -9,6 +9,7 @@ services:
       - "9000:9000"
     volumes:
       - ./app:/app/app
+      - ./docker-entrypoint.sh:/app/docker-entrypoint.sh
       - cache-pip:/root/.cache/pip
       - cache-poetry:/root/.cache/poetry
       - cache-whisper:/root/.cache/whisper
@@ -17,4 +18,3 @@ volumes:
   cache-pip:
   cache-poetry:
   cache-whisper:
-  cache-faster-whisper:
