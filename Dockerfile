@@ -5,6 +5,7 @@ FROM python:3.10-bookworm
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get -qq update \
     && apt-get -qq install --no-install-recommends \
+    curl \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
