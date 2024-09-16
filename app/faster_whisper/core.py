@@ -51,7 +51,7 @@ def transcribe(
         text = ""
         segment_generator, info = model.transcribe(audio, beam_size=5, **options_dict)
         for segment in segment_generator:
-            segments.append(segment)
+            segments.append(dict(segment._asdict()))
             text = text + segment.text
         result = {"language": options_dict.get("language", info.language), "segments": segments, "text": text}
 
