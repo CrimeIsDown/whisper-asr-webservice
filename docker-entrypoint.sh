@@ -15,13 +15,23 @@ then
     $POETRY_VENV/bin/python3 app/download_model.py 2>&1 | tee -a /onstart.log
 fi
 
+FASTAPI_SUBCOMMAND=run
+
+if [ "$1" == "run" ] || [ "$1" == "dev" ]; then
+    FASTAPI_SUBCOMMAND=$1
+    shift
+fi
+
+HOST=0.0.0.0
+PORT=9000
+
 if [ -n "${WEBHOOK_SECRET}" ] && [ -n "${WEBHOOK_URL}" ]; then
     SERVER_NAME=${SERVER_NAME:-${VAST_CONTAINERLABEL:-$(hostname)}}
     SERVER_IP=${SERVER_IP:-${PUBLIC_IPADDR:-$(curl -s "https://ipinfo.io/ip")}}
-    SERVER_PORT=${SERVER_PORT:-${VAST_TCP_PORT_9000:-9000}}
+    SERVER_PORT=${SERVER_PORT:-${VAST_TCP_PORT_9000:-${PORT}}}
 
     set -m
-    gunicorn --bind 0.0.0.0:9000 --workers ${ASR_WORKERS:-1} --timeout 0 app.webservice:app -k uvicorn.workers.UvicornWorker $@ &
+    fastapi $FASTAPI_SUBCOMMAND --host $HOST --port $PORT --workers ${ASR_WORKERS:-1} $@ &
 
     # Wait for the server to start
     sleep 5
@@ -42,5 +52,5 @@ if [ -n "${WEBHOOK_SECRET}" ] && [ -n "${WEBHOOK_URL}" ]; then
 
     fg %1
 else
-    gunicorn --bind 0.0.0.0:9000 --workers ${ASR_WORKERS:-1} --timeout 0 app.webservice:app -k uvicorn.workers.UvicornWorker $@
+    fastapi $FASTAPI_SUBCOMMAND --host $HOST --port $PORT --workers ${ASR_WORKERS:-1} $@
 fi

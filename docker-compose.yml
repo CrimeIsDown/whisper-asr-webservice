@@ -6,7 +6,7 @@ services:
     environment:
       - ASR_MODEL=base
     ports:
-      - "9000:9000"
+      - "9010:9000"
     volumes:
       - ./app:/app/app
       - ./docker-entrypoint.sh:/app/docker-entrypoint.sh

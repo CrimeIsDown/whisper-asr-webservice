@@ -5,7 +5,7 @@ import os
 import ffmpeg
 import numpy as np
 
-from app.webservice import SAMPLE_RATE
+from app.api import SAMPLE_RATE
 
 
 ASR_ENGINE = os.getenv("ASR_ENGINE", "openai_whisper")

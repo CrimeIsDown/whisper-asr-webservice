@@ -1,6 +1,8 @@
 import importlib.metadata
+import logging
 import os
 from os import path
+import sys
 from typing import Annotated, BinaryIO, Union
 from urllib.parse import quote
 
@@ -14,9 +16,9 @@ from whisper import tokenizer
 
 ASR_ENGINE = os.getenv("ASR_ENGINE", "openai_whisper")
 if ASR_ENGINE == "faster_whisper":
-    from .faster_whisper.core import language_detection, transcribe
+    from app.faster_whisper.core import language_detection, transcribe
 else:
-    from .openai_whisper.core import language_detection, transcribe
+    from app.openai_whisper.core import language_detection, transcribe
 
 SAMPLE_RATE = 16000
 LANGUAGE_CODES = sorted(tokenizer.LANGUAGES.keys())
@@ -30,6 +32,15 @@ app = FastAPI(
     swagger_ui_parameters={"defaultModelsExpandDepth": -1},
     license_info={"name": "MIT License", "url": projectMetadata["License"]},
 )
+
+# logger = logging.getLogger()
+# logger.setLevel(os.getenv("UVICORN_LOG_LEVEL", "INFO").upper())
+# stream_handler = logging.StreamHandler(sys.stdout)
+# log_formatter = logging.Formatter(
+#     "%(asctime)s [%(processName)s: %(process)d] [%(threadName)s: %(thread)d] [%(levelname)s] %(name)s: %(message)s"
+# )
+# stream_handler.setFormatter(log_formatter)
+# logger.addHandler(stream_handler)
 
 assets_path = os.getcwd() + "/swagger-ui-assets"
 if path.exists(assets_path + "/swagger-ui.css") and path.exists(assets_path + "/swagger-ui-bundle.js"):
