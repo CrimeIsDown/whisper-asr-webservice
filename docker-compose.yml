@@ -1,5 +1,3 @@
-version: "3.4"
-
 services:
   whisper-asr-webservice:
     build:
@@ -8,9 +6,10 @@ services:
     environment:
       - ASR_MODEL=base
     ports:
-      - "9000:9000"
+      - "9010:9000"
     volumes:
       - ./app:/app/app
+      - ./docker-entrypoint.sh:/app/docker-entrypoint.sh
       - cache-pip:/root/.cache/pip
       - cache-poetry:/root/.cache/poetry
       - cache-whisper:/root/.cache/whisper
@@ -19,4 +18,3 @@ volumes:
   cache-pip:
   cache-poetry:
   cache-whisper:
-  cache-faster-whisper:

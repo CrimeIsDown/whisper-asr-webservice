@@ -1,7 +1,7 @@
-![Release](https://img.shields.io/github/v/release/ahmetoner/whisper-asr-webservice.svg)
+![Release](https://img.shields.io/github/v/release/CrimeIsDown/whisper-asr-webservice.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/onerahmet/openai-whisper-asr-webservice.svg)
-![Build](https://img.shields.io/github/actions/workflow/status/ahmetoner/whisper-asr-webservice/docker-publish.yml.svg)
-![Licence](https://img.shields.io/github/license/ahmetoner/whisper-asr-webservice.svg)
+![Build](https://img.shields.io/github/actions/workflow/status/CrimeIsDown/whisper-asr-webservice/docker-publish.yml.svg)
+![Licence](https://img.shields.io/github/license/CrimeIsDown/whisper-asr-webservice.svg)
 
 # Whisper ASR Webservice
 
@@ -19,23 +19,22 @@ Current release (v1.5.0) supports following whisper models:
 ### CPU
 
 ```sh
-docker run -d -p 9000:9000 -e ASR_MODEL=base -e ASR_ENGINE=openai_whisper onerahmet/openai-whisper-asr-webservice:latest
+docker run -d -p 9000:9000 -e ASR_MODEL=base -e ASR_ENGINE=openai_whisper ghcr.io/crimeisdown/whisper-asr-webservice:latest
 ```
 
 ### GPU
 
 ```sh
-docker run -d --gpus all -p 9000:9000 -e ASR_MODEL=base -e ASR_ENGINE=openai_whisper onerahmet/openai-whisper-asr-webservice:latest-gpu
+docker run -d --gpus all -p 9000:9000 -e ASR_MODEL=base -e ASR_ENGINE=openai_whisper ghcr.io/crimeisdown/whisper-asr-webservice:latest-gpu
 ```
 
 for more information:
 
-- [Documentation/Run](https://ahmetoner.github.io/whisper-asr-webservice/run)
-- [Docker Hub](https://hub.docker.com/r/onerahmet/openai-whisper-asr-webservice)
+- [Documentation/Run](https://ahmetoner.com/whisper-asr-webservice/run/)
 
 ## Documentation
 
-Explore the documentation by clicking [here](https://ahmetoner.github.io/whisper-asr-webservice).
+Explore the documentation by clicking [here](https://ahmetoner.com/whisper-asr-webservice).
 
 ## Credits
 
